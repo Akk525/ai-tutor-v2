@@ -1,8 +1,113 @@
+'use client'
 import Image from "next/image";
 import * as React from 'react';
+import {AppBar, Box, Toolbar, IconButton, Typography, Tooltip, Avatar, Menu, MenuItem, Stack, Button} from "@mui/material";
+
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+let user = "John";
 
 export default function Home() {
+
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+
   return (
-    <h1>Hello World!</h1>
+    <>
+      {/* Page Menu: Start */}
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              LearnIT
+            </Typography>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+
+    {/* Page Menu: End */}
+
+    {/* Container Component: Start */}
+    <Stack>
+      <Box height="45vh" margin="1%" sx={{ boxShadow: 2 }} borderRadius={5}>
+        <Stack direction="row" padding="1%" alignItems="center" justifyContent="center">
+          <Box width="50%">
+            <Typography variant="h1">Hi {user}!</Typography>
+            <Typography variant="h4">Looks like you are making some progress!</Typography>
+          </Box>
+          <Box width="50%">
+            
+          </Box>
+        </Stack>
+      </Box>
+      <Box margin="1%" sx={{ boxShadow: 2 }} borderRadius={5} height="39vh">
+        <Stack direction="row" padding="1%" alignItems="center" justifyContent="space-evenly">
+          <Box sx={{ boxShadow: 2, cursor: "pointer", backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://t4.ftcdn.net/jpg/05/52/90/05/360_F_552900530_D4WF1c3zGsvIGfLgKaRBrEmbvPlk6O6E.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} borderRadius={5} padding={8} onClick={() => {alert("Clicked!")}}>
+            <Typography color="white">Chemistry</Typography>
+          </Box>
+          <Box sx={{ boxShadow: 2, cursor: "pointer", backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlq8efJYz16TnXMfiqDjnZk8Y63Gvjj3sAow&s')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} borderRadius={5} padding={8} onClick={() => {alert("Clicked!")}}>
+            <Typography color="white">Physics</Typography>
+          </Box>
+          <Box sx={{ boxShadow: 2, cursor: "pointer", backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://wallpapers.com/images/hd/cool-math-okpsr0q1zzn8j61i.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} borderRadius={5} padding={8} onClick={() => {alert("Clicked!")}}>
+            <Typography color="white">Mathematics</Typography>
+          </Box>
+          <Box sx={{ boxShadow: 2, cursor: "pointer", backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMML_PDVO8B1M3naJp9J0wFbs5zFbdbTAH6g&s')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} borderRadius={5} padding={8} onClick={() => {alert("Clicked!")}}>
+            <Typography color="white">Economics</Typography>
+          </Box>
+          <Box sx={{ boxShadow: 2, cursor: "pointer", backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://thumbs.dreamstime.com/b/german-tricolor-flag-horizontal-stripes-german-flag-horizontal-stripes-german-flag-cool-grunge-texture-vector-flag-161319265.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} borderRadius={5} padding={8} onClick={() => {alert("Clicked!")}}>
+            <Typography color="white">German</Typography>
+          </Box>
+          <Box sx={{ boxShadow: 2, cursor: "pointer", backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://e1.pxfuel.com/desktop-wallpaper/533/240/desktop-wallpaper-english-words-vocabulary.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} borderRadius={5} padding={8} onClick={() => {alert("Clicked!")}}>
+            <Typography color="white">English</Typography>
+          </Box>
+        </Stack>
+      </Box>
+    </Stack>
+  </>
   );
 }
