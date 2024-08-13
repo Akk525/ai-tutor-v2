@@ -1,11 +1,13 @@
 'use client'
 import Image from "next/image";
 import * as React from 'react';
+import { useState } from 'react';
 import {AppBar, Box, Toolbar, IconButton, Typography, Tooltip, Avatar, Menu, MenuItem, Stack, CircularProgress} from "@mui/material";
+import ChatPage from './ChatPage';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-let user = "Richard";
-let progress = 80;
+let user = "Ritkriti";
+let progress = 70;
 
 function SpeedometerProgressBar({ value }) {
   return (
@@ -52,6 +54,16 @@ export default function Home() {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleOpenChat = () => {
+    setIsChatOpen(true);
+  };
+
+  const handleCloseChat = () => {
+    setIsChatOpen(false);
+  };
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -159,9 +171,7 @@ export default function Home() {
       }}
       borderRadius={5}
       padding={8}
-      onClick={() => {
-        alert("Clicked!");
-      }}
+      onClick={handleOpenChat}
     >
       <Typography color="white">Chemistry</Typography>
     </Box>
@@ -176,9 +186,7 @@ export default function Home() {
       }}
       borderRadius={5}
       padding={8}
-      onClick={() => {
-        alert("Clicked!");
-      }}
+      onClick={handleOpenChat}
     >
       <Typography color="white">Physics</Typography>
     </Box>
@@ -254,6 +262,9 @@ export default function Home() {
 </Box>
 
     </Stack>
+
+    <ChatPage isChatOpen={isChatOpen} handleCloseChat={handleCloseChat} />
+
   </>
   );
 }
