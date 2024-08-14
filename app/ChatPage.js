@@ -4,7 +4,7 @@ import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const ChatApp = ({ isChatOpen, handleCloseChat }) => {
-
+  // Using useState hook for managing state
   const [prompt, setPrompt] = useState('');
   const [text, setText] = useState('');
 
@@ -13,9 +13,9 @@ const ChatApp = ({ isChatOpen, handleCloseChat }) => {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          body: JSON.stringify({body: prompt})
-        }
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ body: prompt }) // Corrected placement of 'body'
       });
 
       const data = await response.json();
@@ -23,12 +23,12 @@ const ChatApp = ({ isChatOpen, handleCloseChat }) => {
       if (response.ok) {
         setText(data.text);
       } else {
-        console.error(error);
+        console.error('Error:', data);
       }
     } catch (error) {
       console.error("Error:" + error);
     }
-  }
+  };
 
   return (
     <div>
@@ -66,6 +66,7 @@ const ChatApp = ({ isChatOpen, handleCloseChat }) => {
               placeholder="Type your message..."
               value={prompt}
               sx={{ mr: 2 }}
+              onChange={(event) => setPrompt(event.target.value)} // Using setPrompt to update state
             />
             <Button onClick={handleGenerate} variant="contained">Send</Button>
           </Box>
