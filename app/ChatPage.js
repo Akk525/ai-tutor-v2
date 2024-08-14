@@ -4,6 +4,32 @@ import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const ChatApp = ({ isChatOpen, handleCloseChat }) => {
+
+  const [prompt, setPrompt] = useState('');
+  const [text, setText] = useState('');
+
+  const handleGenerate = async () => {
+    try {
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          body: JSON.stringify({body: prompt})
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setText(data.text);
+      } else {
+        console.error(error);
+      }
+    } catch (error) {
+      console.error("Error:" + error);
+    }
+  }
+
   return (
     <div>
       {/* Chat UI */}
@@ -38,9 +64,10 @@ const ChatApp = ({ isChatOpen, handleCloseChat }) => {
               variant="outlined"
               fullWidth
               placeholder="Type your message..."
+              value={prompt}
               sx={{ mr: 2 }}
             />
-            <Button variant="contained">Send</Button>
+            <Button onClick={handleGenerate} variant="contained">Send</Button>
           </Box>
         </Box>
       )}
