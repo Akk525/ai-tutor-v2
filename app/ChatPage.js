@@ -15,20 +15,23 @@ const ChatApp = ({ isChatOpen, handleCloseChat }) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ body: prompt }) // Corrected placement of 'body'
+        body: JSON.stringify({ body: prompt })
       });
-
+  
+      console.log("Response status:", response.status);
       const data = await response.json();
-
+      console.log("Response data:", data);
+  
       if (response.ok) {
         setText(data.text);
       } else {
         console.error('Error:', data);
       }
     } catch (error) {
-      console.error("Error:" + error);
+      console.error("Error:", error);
     }
   };
+  
 
   return (
     <div>
@@ -55,7 +58,7 @@ const ChatApp = ({ isChatOpen, handleCloseChat }) => {
           {/* Chat History */}
           <Box flex={1} overflow="auto" p={2}>
             {/* Render chat messages here */}
-            <Typography variant="body1">hi</Typography>
+            <Typography variant="body1">{text}</Typography>
           </Box>
 
           {/* Input Box */}
