@@ -188,7 +188,7 @@ export default function Home() {
       padding={8}
       onClick={handleOpenChat}
     >
-      <Typography color="white">Physics</Typography>
+      <Typography color="white">Biology</Typography>
     </Box>
     <Box
       sx={{
@@ -239,7 +239,7 @@ export default function Home() {
         alert("Clicked!");
       }}
     >
-      <Typography color="white">German</Typography>
+      <Typography color="white">Hindi</Typography>
     </Box>
     <Box
       sx={{
